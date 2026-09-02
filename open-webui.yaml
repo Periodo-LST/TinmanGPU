@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-webui
+  namespace: ollama
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      name: open-webui
+  template:
+    metadata:
+      labels:
+        name: open-webui
+    spec:
+      nodeName: tinman
+      containers:
+      - name: open-webui
+        image: ghcr.io/open-webui/open-webui:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8080
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "1"
+        env:
+        - name: OLLAMA_BASE_URL
+          value: "http://ollama:80"
+        volumeMounts:
+        - mountPath: /app/backend/data
+          name: webui-storage
+      volumes:
+      - hostPath:
+          path: /opt/open-webui
+          type: DirectoryOrCreate
+        name: webui-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: open-webui
+  namespace: ollama
+spec:
+  type: ClusterIP
+  selector:
+    name: open-webui
+  ports:
+  - port: 80
+    name: http
+    targetPort: http
+    protocol: TCP
