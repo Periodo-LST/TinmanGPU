@@ -19,7 +19,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: tinman.lst
+  - host: 'xxx'
     http:
       paths:
       - path: /
@@ -29,7 +29,7 @@ spec:
             name: open-webui
             port:
               number: 80
-  - host: ollama.tinman.lst
+  - host: 'xxx'
     http:
       paths:
       - path: /
@@ -48,16 +48,16 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-    cert-manager.io/cluster-issuer: fluffy-acme
+    cert-manager.io/cluster-issuer: 'xxx'
 spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - tinman.lst
-    - ollama.tinman.lst
-    secretName: tinman-lst-tls
+    - 'xxx'
+    - 'xxx'
+    secretName: 'xxx'
   rules:
-  - host: tinman.lst
+  - host: 'xxx'
     http:
       paths:
       - path: /
@@ -67,7 +67,7 @@ spec:
             name: open-webui
             port:
               number: 80
-  - host: ollama.tinman.lst
+  - host: 'xxx'
     http:
       paths:
       - path: /
