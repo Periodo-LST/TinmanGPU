@@ -4,10 +4,10 @@ metadata:
   name: fluffy-acme
 spec:
   acme:
-    server: https://step-ca.fluffy.lst/acme/acme-internal/directory
-    email: it@lst.tfo.upm.es
+    server: 'xxx'
+    email: 'xxx'
     privateKeySecretRef:
-      name: fluffy-account-key
+      name:'xxx'
 
     # Le indica a cert-manager que confíe en la conexión HTTPS con el servidor Step-CA
     skipTLSVerify: true
